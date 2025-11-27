@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>攻略情報一覧</title>
+</head>
+<body>
+    <h1>攻略情報一覧</h1>
+    <a href="{% url 'contact' %}">お問い合わせはこちら</a>
+    <a href="{% url 'add_strategy' %}">新しい攻略情報を登録</a>
+    <ul>
+        {% for strategy in strategies %}
+            <li>
+                <a href="{% url 'strategy_detail' strategy.pk %}">
+                    {{ strategy.title }}
+                </a>
+                {% if strategy.image %}
+                    <img src="{{ strategy.image.url }}" alt="{{ strategy.title }}">
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>まだ攻略情報はありません。</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ strategy.title }}</title>
+</head>
+<body>
+    <h1>{{ strategy.title }}</h1>
+    <p>{{ strategy.content }}</p>
+
+    {% if strategy.image %}
+        <img src="{{ strategy.image.url }}" alt="{{ strategy.title }}">
+    {% endif %}
+
+    <h2>コメント</h2>
+    <ul>
+        {% for comment in comments %}
+            <li>{{ comment.text }} ({{ comment.created_at }})</li>
+        {% empty %}
+            <li>まだコメントはありません。</li>
+        {% endfor %}
+    </ul>
+
+    <h3>コメントを投稿</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">送信</button>
+    </form>
+
+    <a href="{% url 'index' %}">一覧へ戻る</a>
+</body>
+</html>
