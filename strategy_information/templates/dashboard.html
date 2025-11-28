@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ダッシュボード</title>
+</head>
+<body>
+    <h2>ようこそ {{ request.user.username }} さん！</h2>
+    <p>ここがダッシュボードです。</p>
+    <a href="{% url 'logout' %}">ログアウト</a>
+</body>
+</html>

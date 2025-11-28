@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Strategy, Comment
 from .forms import StrategyForm, CommentForm, ContactForm
+from django.contrib.auth.forms import UserCreationForm
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 # トップページ（攻略情報一覧）
 def index(request):
@@ -66,4 +68,18 @@ def contact(request):
     else:
         form = ContactForm()
     return render(request, "contact.html", {"form": form})
+
+@login_required
+def dashboard(request):
+    return render(request, 'dashboard.html')
+
+def signup(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # 登録後にログインページへ
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})
 
