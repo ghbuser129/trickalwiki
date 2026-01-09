@@ -23,6 +23,9 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 
     path("", include("strategy_information.urls")),
+
+    path('accounts/', include('accounts.urls')),
+
 ]
 
 if settings.DEBUG:
